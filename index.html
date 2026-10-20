@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Almácigo · Buscador de empleo agropecuario y agroindustrial en Argentina</title>
+<meta name="description" content="Proyecto en desarrollo: un solo lugar para las búsquedas laborales del sector agropecuario y agroindustrial argentino, con enlace al aviso original.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --papel:#F8F8F3; --ficha:#FFFFFF; --ficha-2:#FCFCF7;
+  --tinta:#16221B; --tinta-2:#44544A; --surco:#68756C;
+  --linea:#DFE2DA; --linea-suave:#ECEEE7;
+  --brote:#3DA54A; --brote-texto:#27803A; --brote-suave:#E4F3E2;
+  --sol:#F0A202; --sol-texto:#8F6208; --sol-suave:#FDF0D4;
+  --r:12px; --r-chico:7px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --papel:#121A15; --ficha:#1A241E; --ficha-2:#161F1A;
+  --tinta:#EAEFE9; --tinta-2:#B2BEB6; --surco:#8E9A91;
+  --linea:#2B3730; --linea-suave:#212B25;
+  --brote:#5FD46B; --brote-texto:#5FD46B; --brote-suave:#1E3322;
+  --sol:#F5BE4A; --sol-texto:#F5BE4A; --sol-suave:#33280F;
+}}
+:root[data-theme="dark"]{
+  --papel:#121A15; --ficha:#1A241E; --ficha-2:#161F1A;
+  --tinta:#EAEFE9; --tinta-2:#B2BEB6; --surco:#8E9A91;
+  --linea:#2B3730; --linea-suave:#212B25;
+  --brote:#5FD46B; --brote-texto:#5FD46B; --brote-suave:#1E3322;
+  --sol:#F5BE4A; --sol-texto:#F5BE4A; --sol-suave:#33280F;
+}
+*{box-sizing:border-box}
+html,body{background:var(--papel)}
+body{margin:0;color:var(--tinta);
+  font-family:Figtree,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Outfit,"Century Gothic",sans-serif;margin:0;
+  text-wrap:balance;letter-spacing:-.028em}
+h1{font-size:clamp(31px,5.2vw,50px);line-height:1.04;font-weight:800}
+h2{font-size:clamp(23px,3vw,30px);line-height:1.1;font-weight:700;margin-bottom:14px}
+h3{font-size:18px;line-height:1.2;font-weight:600;margin-bottom:6px}
+p{margin:0 0 1em}
+a{color:var(--brote-texto)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.94em}
+.in{max-width:900px;margin:0 auto;padding-inline:16px}
+.banda{padding-block:52px;border-top:1px solid var(--linea-suave)}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--surco);margin:0 0 12px}
+
+.barra{border-bottom:1px solid var(--linea);background:var(--ficha-2)}
+.barra .in{padding-block:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px}
+.marca svg{width:30px;height:30px;flex:none}
+.marca .n{font-family:Outfit,sans-serif;font-weight:700;font-size:23px;
+  letter-spacing:-.035em;line-height:1}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--sol-texto);background:var(--sol-suave);
+  padding:3px 7px;border-radius:4px}
+
+.hero{padding-block:60px 44px}
+.hero p.lead{font-size:19px;color:var(--tinta-2);max-width:60ch;margin-top:18px}
+.estado{display:inline-flex;align-items:center;gap:8px;background:var(--brote-suave);
+  color:var(--brote-texto);font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px;
+  margin-bottom:20px}
+.estado i{width:7px;height:7px;border-radius:50%;background:var(--brote);display:block}
+
+.grilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px}
+.ficha{background:var(--ficha);border:1px solid var(--linea);border-radius:var(--r);
+  padding:20px}
+.ficha p{margin:0;font-size:15.5px;color:var(--tinta-2)}
+ul.limpia{margin:0;padding-left:20px}
+ul.limpia li{margin-bottom:9px;color:var(--tinta-2)}
+ul.limpia li b{color:var(--tinta);font-weight:600}
+
+.pie{border-top:1px solid var(--linea);background:var(--ficha-2);padding-block:26px;
+  font-size:14px;color:var(--surco)}
+.pie .in{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="in">
+    <div class="marca">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 29V13" stroke="var(--brote)" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M16 15c0-5 3.6-8.6 8.6-8.6C24.6 11.4 21 15 16 15z" fill="var(--brote)"/>
+        <path d="M16 20c0-4-2.9-6.9-6.9-6.9C9.1 17.1 12 20 16 20z" fill="var(--sol)"/>
+      </svg>
+      <span class="n">Almácigo</span>
+      <span class="prov">nombre provisional</span>
+    </div>
+  </div>
+</header>
+
+<section class="in hero">
+  <span class="estado"><i></i>Proyecto en desarrollo</span>
+  <h1>Las búsquedas del agro argentino, en un solo lugar</h1>
+  <p class="lead">Un buscador especializado que reúne las ofertas laborales del sector
+  agropecuario y agroindustrial de Argentina dispersas en distintas fuentes, las ordena
+  por puesto, nivel y zona, y envía a cada candidato al aviso original.</p>
+</section>
+
+<section class="banda">
+  <div class="in">
+    <p class="eyebrow">Para quién</p>
+    <h2>Un sector que busca en diez lugares distintos</h2>
+    <p>Quien trabaja en el agro argentino hoy revisa portales generales, bolsas de
+    universidades y colegios profesionales, y las páginas de empleo de cada empresa, una
+    por una. Las búsquedas del sector quedan diluidas entre miles de avisos de otros
+    rubros. Este proyecto existe para juntarlas.</p>
+    <div class="grilla">
+      <div class="ficha">
+        <h3>Perfiles</h3>
+        <p>Ingenieros agrónomos, técnicos agropecuarios, veterinarios, y profesionales de
+        calidad, inocuidad, laboratorio, producción y acopio en agroindustria.</p>
+      </div>
+      <div class="ficha">
+        <h3>Todo el rango</h3>
+        <p>Desde pasantías y primer empleo hasta jefaturas y gerencias. No es una bolsa
+        solo para juniors.</p>
+      </div>
+      <div class="ficha">
+        <h3>Todo el país</h3>
+        <p>Las nueve zonas productivas, con la ubicación de cada aviso resuelta a nivel de
+        provincia y localidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="banda">
+  <div class="in">
+    <p class="eyebrow">Fuentes</p>
+    <h2>De dónde salen los avisos</h2>
+    <ul class="limpia">
+      <li><b>Portales y agregadores asociados.</b> A través de sus programas para editores
+      y de sus feeds o API oficiales, mostrando sus avisos con atribución y derivando el
+      tráfico de vuelta al portal de origen.</li>
+      <li><b>Páginas de empleo de empresas.</b> Las que publican sus búsquedas con marcado
+      estructurado <span class="mono">JobPosting</span> de schema.org, pensado justamente
+      para que los buscadores las indexen.</li>
+      <li><b>Instituciones del sector.</b> Universidades, colegios profesionales,
+      cooperativas y cámaras, únicamente con autorización expresa de cada una.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="banda">
+  <div class="in">
+    <p class="eyebrow">Criterios</p>
+    <h2>Cómo se tratan las fuentes</h2>
+    <ul class="limpia">
+      <li><b>Siempre al origen.</b> Cada aviso enlaza al sitio donde fue publicado. El
+      candidato se postula ahí, no acá.</li>
+      <li><b>Atribución visible.</b> Cada aviso muestra de qué fuente proviene.</li>
+      <li><b>Se respeta el robots.txt</b> de cada sitio, sin excepciones ni rodeos.</li>
+      <li><b>Nada se publica sin permiso.</b> Una fuente que no autorizó, no se muestra.</li>
+      <li><b>Baja el mismo día.</b> Cualquier fuente que pida ser retirada se retira sin
+      discusión y sin demora.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="banda">
+  <div class="in">
+    <p class="eyebrow">Estado</p>
+    <h2>Qué hay hecho y qué falta</h2>
+    <div class="grilla">
+      <div class="ficha">
+        <h3>Hecho</h3>
+        <p>Taxonomía de unos 40 puestos del sector en seis niveles, clasificador
+        automático de avisos con pruebas, relevamiento de fuentes y recolector con control
+        de permisos.</p>
+      </div>
+      <div class="ficha">
+        <h3>En curso</h3>
+        <p>Medición del inventario real disponible por las vías autorizadas, que es lo que
+        define el alcance del sitio.</p>
+      </div>
+      <div class="ficha">
+        <h3>Pendiente</h3>
+        <p>Acuerdos con las fuentes, sitio público, nombre y marca definitivos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="in">
+    <span>Proyecto personal · Argentina · <span id="anio">2026</span></span>
+    <span>Contacto: <a href="mailto:gaita74@gmail.com">gaita74@gmail.com</a></span>
+  </div>
+</footer>
+
+<script>document.getElementById('anio').textContent = new Date().getFullYear();</script>
+</body>
+</html>
